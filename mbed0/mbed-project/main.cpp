@@ -1,21 +1,14 @@
 #include "mbed.h"
 
-DigitalOut redLED(LED_RED);
-DigitalOut greenLED(LED_GREEN);
+AnalogOut Aout(DAC0_OUT);
 
-int Led(DigitalOut& ledpin);
-
-int main() {
-    redLED = 1;
-    greenLED = 1;
-    while (true) {
-        for(int i = 0; i < 6; ++i) { //blink for 10 times
-            redLED = !redLED; // toggle led
-            wait(0.2f);
-        }
-        for(int i = 0; i < 4; i++) {
-            greenLED = !greenLED;
-            wait(0.2f);
-        }
-   }
+int main(){
+  while(1){
+    Aout = 0.25;  // 0.25 * 3.3 = 0.825 v
+    wait(2);
+    Aout = 0.5;   // 0.50 * 3.3 = 1.650 v
+    wait(2);
+    Aout = 0.75;  // 0.75 * 3.3 = 2.475 v
+    wait(2);
+  }
 }
