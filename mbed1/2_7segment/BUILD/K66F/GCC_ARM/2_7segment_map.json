@@ -5,9 +5,9 @@
             ".text": 27994,
             ".data": 473,
             ".bss": 6606,
-            ".text-delta": 27994,
-            ".data-delta": 473,
-            ".bss-delta": 6606
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -16,9 +16,9 @@
             ".text": 140,
             ".data": 10,
             ".bss": 108,
-            ".text-delta": 140,
-            ".data-delta": 10,
-            ".bss-delta": 108
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -27,9 +27,9 @@
             ".text": 130,
             ".data": 9,
             ".bss": 33,
-            ".text-delta": 130,
-            ".data-delta": 9,
-            ".bss-delta": 33
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -38,9 +38,9 @@
             ".text": 24565,
             ".data": 2472,
             ".bss": 89,
-            ".text-delta": 24565,
-            ".data-delta": 2472,
-            ".bss-delta": 89
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -49,7 +49,7 @@
             ".text": 3112,
             ".data": 0,
             ".bss": 0,
-            ".text-delta": 3112,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -60,9 +60,9 @@
             ".text": 180,
             ".data": 4,
             ".bss": 28,
-            ".text-delta": 180,
-            ".data-delta": 4,
-            ".bss-delta": 28
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -71,7 +71,7 @@
             ".text": 32,
             ".data": 0,
             ".bss": 0,
-            ".text-delta": 32,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -79,9 +79,9 @@
     {
         "summary": {
             "static_ram": 9832,
-            "static_ram_delta": 9832,
+            "static_ram_delta": 0,
             "total_flash": 59121,
-            "total_flash_delta": 59121
+            "total_flash_delta": 0
         }
     }
 ]
