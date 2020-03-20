@@ -8,13 +8,13 @@ def max_temp(target, data, result):
       if row["station_id"] == target:
          if float(row["TEMP"]) > max_val:
             max_val = float(row["TEMP"])
-   if max_val == -9999999:
+   if max_val == -9999999 or max_val == -99 or max_val == -999:
       result.append([target, "None"])
    else:
       result.append([target, max_val])
 #=======================================
 # Read cwb weather data
-cwb_filename = '107061113.csv'
+cwb_filename = 'sample_input.csv'
 data = []
 header = []
 
@@ -30,9 +30,6 @@ with open(cwb_filename) as csvfile:
 # Retrive all data points which station id is "C0X260" as a list:
 # target_data = list(filter(lambda item: item['station_id'] == 'C0X260', data))
 
-for row in data:
-   if float(row["TEMP"]) == -99.0 or float(row["TEMP"]) == -999.0:
-      del row
 result = []
 max_temp("C0A880", data, result)
 max_temp("C0F9A0", data, result)
