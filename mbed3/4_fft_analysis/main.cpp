@@ -6,13 +6,14 @@ AnalogIn Ain(A0);
 
 int sample = 128;
 int i;
+
 float ADCdata[128];
 
 int main(){
   for (i = 0; i < sample; i++){
     Aout = Ain;
     ADCdata[i] = Ain;
-    wait(1./sample);
+    wait(1.0/sample);
   }
   for (i = 0; i < sample; i++){
     pc.printf("%1.3f\r\n", ADCdata[i]);
