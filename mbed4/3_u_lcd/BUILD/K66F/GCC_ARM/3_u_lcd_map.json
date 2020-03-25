@@ -5,9 +5,9 @@
             ".text": 31469,
             ".data": 473,
             ".bss": 6718,
-            ".text-delta": 31469,
-            ".data-delta": 473,
-            ".bss-delta": 6718
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -16,9 +16,9 @@
             ".text": 1067,
             ".data": 0,
             ".bss": 188,
-            ".text-delta": 1067,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 188
+            ".bss-delta": 0
         }
     },
     {
@@ -27,9 +27,9 @@
             ".text": 192,
             ".data": 11,
             ".bss": 33,
-            ".text-delta": 192,
-            ".data-delta": 11,
-            ".bss-delta": 33
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -38,9 +38,9 @@
             ".text": 35055,
             ".data": 2472,
             ".bss": 89,
-            ".text-delta": 35055,
-            ".data-delta": 2472,
-            ".bss-delta": 89
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -49,7 +49,7 @@
             ".text": 3112,
             ".data": 0,
             ".bss": 0,
-            ".text-delta": 3112,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -60,9 +60,9 @@
             ".text": 180,
             ".data": 4,
             ".bss": 28,
-            ".text-delta": 180,
-            ".data-delta": 4,
-            ".bss-delta": 28
+            ".text-delta": 0,
+            ".data-delta": 0,
+            ".bss-delta": 0
         }
     },
     {
@@ -71,7 +71,7 @@
             ".text": 32,
             ".data": 0,
             ".bss": 0,
-            ".text-delta": 32,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -79,9 +79,9 @@
     {
         "summary": {
             "static_ram": 10016,
-            "static_ram_delta": 10016,
+            "static_ram_delta": 0,
             "total_flash": 74067,
-            "total_flash_delta": 74067
+            "total_flash_delta": 0
         }
     }
 ]
