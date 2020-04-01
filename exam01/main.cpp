@@ -3,8 +3,12 @@
 #include "mbed.h"
 #include "uLCD_4DGL.h"
 
+Serial pc( USBTX, USBRX );
 PwmOut PWM1(D6);
+AnalogIn Ain(A0);
 uLCD_4DGL uLCD(D1, D0, D2); // serial tx, serial rx, reset pin;
+
+float ADCdata[128];
 
 int main()
 {
@@ -21,13 +25,24 @@ int main()
     uLCD.filled_rectangle(32,32,96,96,GREEN);
     PWM1.period(0.001);
     while(1) {
+        index = 0;
         for(float i = 0; i <= 1; i = i + 0.1) {
             PWM1 = i;
             wait(0.1);
+            
+                ADCdata[index] = Ain;
+                pc.printf("%1.3f\r\n", ADCdata[index]);
+                index++;
+            
         }
         for(float i = 1; i >= 0; i = i - 0.1) {
             PWM1 = i;
             wait(0.1);
+            
+                ADCdata[index] = Ain;
+                pc.printf("%1.3f\r\n", ADCdata[index]);
+                index++;
+            
         }
     }
 }
