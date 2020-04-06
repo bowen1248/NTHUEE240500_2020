@@ -10,10 +10,10 @@ DigitalOut greenLED(LED2);
 BusOut display(D6, D7, D9, D10, D11, D5, D4, D8);
 char table[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
 
-float ADCdata[5000];
+float ADCdata[500];
 float input_amplitude = 1.0;
 float offset = 1.0;
-int sampling_rate = 5000;
+int sampling_rate = 500;
 int frequency = 0;
 int i;
 
@@ -57,7 +57,7 @@ int main() {
     for (i = 0; i < sampling_rate; i++) {
       Aout = Ain;
       ADCdata[i] = Ain;
-      wait(0.67/sampling_rate);
+      wait(0.967/sampling_rate);
     }
     for (i = 0; i < sampling_rate; i++) {
       pc.printf("%1.3f\r\n",ADCdata[i]);
