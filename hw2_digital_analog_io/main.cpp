@@ -18,15 +18,14 @@ int frequency = 0;
 int i;
 
 void DAC_output (int freq) {
-  int t = 0;
+  float t = 0;
   double sample = 0;
   while (1) {
     if (Switch == 0)
       break;
-    sample = ((input_amplitude * (sin(2*pi*freq*t)) + offset) / max_voltage);
+    sample = ((0.5 * (sin(2*pi*freq*t))) + 0.5);
     Aout.write(sample);
     t = t + 0.0002;
-    pc.printf("%d\r\n",sample);
     wait(0.0002);
   }
   Aout.write(0);
@@ -53,6 +52,7 @@ int main() {
   greenLED = 0;
   redLED = 1;
   while(1) {
+    Aout.write(0);
     count = 0;
     for (i = 0; i < sampling_rate; i++) {
       Aout = Ain;
@@ -60,12 +60,12 @@ int main() {
       wait(0.67/sampling_rate);
     }
     for (i = 0; i < sampling_rate; i++) {
+      pc.printf("%1.3f\r\n",ADCdata[i]);
       if (ADCdata[i] <= (input_amplitude / max_voltage) / 2 && ADCdata[i + 1] >= (input_amplitude / max_voltage) / 2) {
         count++;
       }
     }
     frequency = count;
-    pc.printf("%d\r\n", frequency);
     if( Switch == 0 ) {
       greenLED = 1;
       redLED = 0;
