@@ -1,0 +1,36 @@
+../mbed-os-build-i2c/features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/psa_crypto_storage.o: \
+ features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/psa_crypto_storage.c \
+ /home/bw/ee2405/mbed-os-build-i2c/mbed_config.h \
+ features/mbedtls/inc/mbedtls/config.h \
+ features/mbedtls/platform/inc/platform_mbed.h \
+ features/mbedtls/inc/mbedtls/check_config.h \
+ features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/psa_crypto_service_integration.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_platform.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_types.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_values.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_sizes.h \
+ features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/COMPONENT_NSPE/crypto_struct.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/cipher.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/platform_util.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/cmac.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/gcm.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md2.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md4.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md5.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/ripemd160.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha1.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha256.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha512.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_extra.h \
+ features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/psa_crypto_storage.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_se_driver.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_driver_common.h \
+ components/TARGET_PSA/inc/psa/error.h \
+ components/TARGET_PSA/inc/psa/internal_trusted_storage.h \
+ components/TARGET_PSA/services/storage/its/psa_prot_internal_storage.h \
+ components/TARGET_PSA/inc/psa/storage_common.h platform/mbed_toolchain.h \
+ platform/mbed_preprocessor.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/platform.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/platform_time.h

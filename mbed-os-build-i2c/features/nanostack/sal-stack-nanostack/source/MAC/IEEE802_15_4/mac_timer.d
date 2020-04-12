@@ -1,0 +1,37 @@
+../mbed-os-build-i2c/features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_timer.o: \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_timer.c \
+ /home/bw/ee2405/mbed-os-build-i2c/mbed_config.h \
+ features/nanostack/sal-stack-nanostack/source/nsconfig.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_types.h \
+ features/nanostack/sal-stack-nanostack/source/configs/cfg_nanostack_full.h \
+ features/nanostack/sal-stack-nanostack/source/configs/cfg_generic.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_thread_border_router.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_thread_router.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_thread_full_end_device.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_thread_end_device.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_ethernet.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_lowpan_border_router.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_lowpan_router.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_lowpan_host.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_local_socket.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_rf_tunnel.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_ws_border_router.h \
+ features/nanostack/sal-stack-nanostack/source/configs/base/cfg_ws_router.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_trace.h \
+ features/frameworks/mbed-trace/mbed-trace/mbed_trace.h \
+ features/nanostack/sal-stack-nanostack-eventloop/nanostack-event-loop/eventOS_callback_timer.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/platform/arm_hal_interrupt.h \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/sw_mac_internal.h \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_pd_sap.h \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_timer.h \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_defines.h \
+ features/nanostack/sal-stack-nanostack-eventloop/nanostack-event-loop/eventOS_event.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_list.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_types.h \
+ features/nanostack/sal-stack-nanostack/nanostack/mlme.h \
+ features/nanostack/sal-stack-nanostack/nanostack/mac_common_defines.h \
+ features/nanostack/sal-stack-nanostack/nanostack/net_interface.h \
+ features/nanostack/sal-stack-nanostack/nanostack/platform/arm_hal_phy.h \
+ features/nanostack/sal-stack-nanostack/source/MAC/IEEE802_15_4/mac_data_buffer.h \
+ features/nanostack/sal-stack-nanostack/nanostack/mac_mcps.h \
+ features/nanostack/sal-stack-nanostack/nanostack/sw_mac.h

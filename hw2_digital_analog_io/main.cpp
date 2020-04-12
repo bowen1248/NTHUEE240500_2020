@@ -34,15 +34,26 @@ void DAC_output (int freq) {
 
 void freq_display(int value) {
   int dis_val = 0;
+  while(1) {
+  if (Switch == 1)
+    break;
   dis_val = value / 100;
   display = table[dis_val];
-  wait(0.5);
+  wait(0.4);
+  if (Switch == 1)
+    break;
   dis_val = (value % 100) / 10;
   display = table[dis_val];
-  wait(0.5);
+  wait(0.4);
+  if (Switch == 1)
+    break;
   dis_val = value % 10;
   display = table[dis_val] + 0x80;
-  wait(0.5);
+  wait(0.4);
+  }
+  display = 0x00;
+  redLED = 1;
+  greenLED = 0;
   return;
 }
 
@@ -74,7 +85,6 @@ int main() {
     else {
       greenLED = 0;
       redLED = 1;
-      display = 0x00;
       DAC_output(frequency);
     }
   }

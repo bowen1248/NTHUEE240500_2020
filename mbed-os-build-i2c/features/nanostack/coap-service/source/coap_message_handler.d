@@ -1,0 +1,21 @@
+../mbed-os-build-i2c/features/nanostack/coap-service/source/coap_message_handler.o: \
+ features/nanostack/coap-service/source/coap_message_handler.c \
+ /home/bw/ee2405/mbed-os-build-i2c/mbed_config.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/nsdynmemLIB.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_types.h \
+ features/nanostack/coap-service/source/include/coap_service_api_internal.h \
+ features/nanostack/coap-service/source/include/coap_message_handler.h \
+ features/frameworks/mbed-coap/mbed-coap/sn_coap_header.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_list.h \
+ features/nanostack/coap-service/source/include/coap_message_handler.h \
+ features/frameworks/mbed-coap/mbed-coap/sn_coap_protocol.h \
+ features/frameworks/mbed-coap/mbed-coap/sn_coap_header.h \
+ features/frameworks/mbed-coap/source/include/sn_coap_protocol_internal.h \
+ features/frameworks/mbed-coap/source/include/sn_coap_header_internal.h \
+ features/frameworks/mbed-coap/mbed-coap/sn_config.h \
+ features/nanostack/sal-stack-nanostack/nanostack/socket_api.h \
+ features/nanostack/sal-stack-nanostack/nanostack/ns_address.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_types.h \
+ features/frameworks/nanostack-libservice/mbed-client-libservice/ns_trace.h \
+ features/frameworks/mbed-trace/mbed-trace/mbed_trace.h \
+ features/frameworks/mbed-client-randlib/mbed-client-randlib/randLIB.h

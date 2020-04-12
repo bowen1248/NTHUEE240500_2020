@@ -1,0 +1,49 @@
+../mbed-os-build-i2c/features/mbedtls/platform/TARGET_PSA/COMPONENT_NSPE/src/psa_hrng.o: \
+ features/mbedtls/platform/TARGET_PSA/COMPONENT_NSPE/src/psa_hrng.c \
+ /home/bw/ee2405/mbed-os-build-i2c/mbed_config.h hal/trng_api.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/TARGET_FRDM/device.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/api/objects.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/cmsis.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/fsl_device_registers.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/MK66F18.h \
+ cmsis/TARGET_CORTEX_M/core_cm4.h cmsis/TARGET_CORTEX_M/cmsis_version.h \
+ cmsis/TARGET_CORTEX_M/cmsis_compiler.h cmsis/TARGET_CORTEX_M/cmsis_gcc.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/system_MK66F18.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/MK66F18_features.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/cmsis_nvic.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/api/PortNames.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/TARGET_FRDM/PeripheralNames.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/TARGET_FRDM/PinNames.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_flash.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_common.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/device/fsl_device_registers.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_clock.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/api/dma_api_hal.h \
+ hal/dma_api.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_edma.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/api/gpio_object.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/us_ticker_defines.h \
+ targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_pit.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_platform.h \
+ features/mbedtls/inc/mbedtls/config.h \
+ features/mbedtls/platform/inc/platform_mbed.h \
+ features/mbedtls/inc/mbedtls/check_config.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_types.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_values.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_sizes.h \
+ features/mbedtls/mbed-crypto/platform/COMPONENT_PSA_SRV_IMPL/COMPONENT_NSPE/crypto_struct.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/cipher.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/platform_util.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/cmac.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/gcm.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md2.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md4.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/md5.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/ripemd160.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha1.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha256.h \
+ features/mbedtls/mbed-crypto/inc/mbedtls/sha512.h \
+ features/mbedtls/mbed-crypto/inc/psa/crypto_extra.h \
+ platform/mbed_toolchain.h platform/mbed_preprocessor.h
