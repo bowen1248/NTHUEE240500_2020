@@ -1,5 +1,5 @@
 #include "mbed.h"
-#include "TextLCD.h"
+#include "uLCD_4DGL.h"
 #include "fsl_port.h"
 #include "fsl_gpio.h"
 
@@ -33,28 +33,33 @@ I2C i2c_lcd(D14, D15); // SDA, SCL
 I2C i2c(PTD9, PTD8);
 
 //TextLCD_SPI lcd(&spi_lcd, p8, TextLCD::LCD40x4);   // SPI bus, 74595 expander, CS pin, LCD Type
-TextLCD_I2C lcd(&i2c_lcd, 0x4E, TextLCD::LCD16x2);  // I2C bus, PCF8574 Slaveaddress, LCD Type
+//TextLCD_I2C lcd(&i2c_lcd, 0x4E, TextLCD::LCD16x2);  // I2C bus, PCF8574 Slaveaddress, LCD Type
 //TextLCD_I2C lcd(&i2c_lcd, 0x42, TextLCD::LCD16x2, TextLCD::WS0010); // I2C bus, PCF8574 Slaveaddress, LCD Type, Device Type
 //TextLCD_SPI_N lcd(&spi_lcd, p8, p9);               // SPI bus, CS pin, RS pin, LCDType=LCD16x2, BL=NC, LCDTCtrl=ST7032_3V3
 //TextLCD_I2C_N lcd(&i2c_lcd, ST7032_SA, TextLCD::LCD16x2, NC, TextLCD::ST7032_3V3); // I2C bus, Slaveaddress, LCD Type, BL=NC, LCDTCtrl=ST7032_3V3
+uLCD_4DGL uLCD(D1, D0, D2);
 
 int m_addr = FXOS8700CQ_SLAVE_ADDR1;
 void FXOS8700CQ_readRegs(int addr, uint8_t * data, int len);
 void FXOS8700CQ_writeRegs(uint8_t * data, int len);
 
 int main() {
+    // set baud
     pc.baud(9600);
     uint8_t who_am_i, data[2], res[6];
     int16_t acc16;
     float t[3];
+
     // Enable the FXOS8700Q
     FXOS8700CQ_readRegs( FXOS8700Q_CTRL_REG1, &data[1], 1);
     data[1] |= 0x01;
     data[0] = FXOS8700Q_CTRL_REG1;
     FXOS8700CQ_writeRegs(data, 2);
+
     // Get the slave address
     FXOS8700CQ_readRegs(FXOS8700Q_WHOAMI, &who_am_i, 1);
     while (true) {
+    // get x, y, z on acceleometer
     FXOS8700CQ_readRegs(FXOS8700Q_OUT_X_MSB, res, 6);
     acc16 = (res[0] << 6) | (res[1] >> 2);
     if (acc16 > UINT14_MAX/2)
@@ -70,10 +75,10 @@ int main() {
     t[2] = ((float)acc16) / 4096.0f;
 
     // printout
-    lcd.printf("X=%6.3fY=%6.3f",t[0], t[1]);
-    lcd.locate(0, 1);
-    lcd.printf("Z=%6.3f", t[2]);
-    lcd.locate(0, 0);
+    uLCD.cls();
+    uLCD.printf("\nX=%8.5f\n",t[0]);
+    uLCD.printf("Y=%8.5f\n",t[1]);
+    uLCD.printf("Z=%8.5f\n",t[2]);
     wait(1);
     }
 }

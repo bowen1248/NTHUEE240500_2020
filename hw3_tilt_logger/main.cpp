@@ -31,27 +31,35 @@ DigitalIn button(SW3);
 DigitalOut led(LED1);
 Thread t;
 EventQueue queue;
+
 // global variable
+// counting which array place to log in
 int counting = 0;
 int i, j;
 float xval[100], yval[100], zval[100];
 int tilt[100];
 int m_addr = FXOS8700CQ_SLAVE_ADDR1;
+
 // function
 void FXOS8700CQ_readRegs(int addr, uint8_t * data, int len);
 void FXOS8700CQ_writeRegs(uint8_t * data, int len);
 void read_gravity();
 
 int main() {
+    // set thread and baud rate
     t.start(callback(&queue, &EventQueue::dispatch_forever));
     pc.baud(9600);
+
+    // big loop for repeat reading sequence
     while(1) {
+        // set led to light
         led = 0;
         counting = 0;
         while (1) {
             if (button == 0)
                 break;
         }
+        // log in to arrays
         for (j = 0; j < 100; j++) {
             queue.call(&read_gravity);
             wait_ms(100);
@@ -77,18 +85,18 @@ void FXOS8700CQ_writeRegs(uint8_t * data, int len) {
 }
 void read_gravity () {
     uint8_t who_am_i, data[2], res[6];
-   int16_t acc16;
-   float t[3];
-   // print out value every 1s
-   // Enable the FXOS8700Q
-   FXOS8700CQ_readRegs( FXOS8700Q_CTRL_REG1, &data[1], 1);
-   data[1] |= 0x01;
-   data[0] = FXOS8700Q_CTRL_REG1;
-   FXOS8700CQ_writeRegs(data, 2);
-   // Get the slave address
-   FXOS8700CQ_readRegs(FXOS8700Q_WHOAMI, &who_am_i, 1);
-   //pc.printf("Here is %x\r\n", who_am_i);
+    int16_t acc16;
+    float t[3];
+    // print out value every 1s
+    // Enable the FXOS8700Q
+    FXOS8700CQ_readRegs( FXOS8700Q_CTRL_REG1, &data[1], 1);
+    data[1] |= 0x01;
+    data[0] = FXOS8700Q_CTRL_REG1;
+    FXOS8700CQ_writeRegs(data, 2);
+    // Get the slave address
+    FXOS8700CQ_readRegs(FXOS8700Q_WHOAMI, &who_am_i, 1);
     FXOS8700CQ_readRegs(FXOS8700Q_OUT_X_MSB, res, 6);
+    // process data into float
     acc16 = (res[0] << 6) | (res[1] >> 2);
     if (acc16 > UINT14_MAX/2)
         acc16 -= UINT14_MAX;
@@ -101,6 +109,7 @@ void read_gravity () {
     if (acc16 > UINT14_MAX/2)
         acc16 -= UINT14_MAX;
     t[2] = ((float)acc16) / 4096.0f;
+    // log into array
     if (counting < 100) {
         led = !led;
         xval[counting] = t[0];
