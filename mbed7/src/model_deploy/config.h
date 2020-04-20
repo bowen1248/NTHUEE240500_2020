@@ -1,7 +1,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 // The number of labels (without negative)
-#define label_num 2
+#define label_num 3
 
 struct Config {
   // This must be the same as seq_length in the src/model_train/config.py
@@ -9,6 +9,13 @@ struct Config {
   // The number of expected consecutive inferences for each gesture type.
   const int consecutiveInferenceThresholds[label_num] = {20, 10};
   const char* output_message[label_num] = {
+	"W_SHAPE\n\r"
+	"*         *         *\n\r"
+	" *       * *       * \n\r"
+	"  *     *   *     *  \n\r"
+	"   *   *     *   *   \n\r"
+	"    * *       * *    \n\r"
+	"     *         *     \n\r",
         "RING:\n\r"
         "          *       \n\r"
         "       *     *    \n\r"
