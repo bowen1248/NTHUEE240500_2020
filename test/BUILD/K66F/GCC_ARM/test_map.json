@@ -2,43 +2,43 @@
     {
         "module": "../mbed-os-build",
         "size": {
-            ".text": 32857,
+            ".text": 29934,
             ".data": 473,
-            ".bss": 7258,
-            ".text-delta": 1663,
+            ".bss": 6606,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 540
+            ".bss-delta": 0
         }
     },
     {
         "module": "BUILD/K66F",
         "size": {
-            ".text": 794,
+            ".text": 292,
             ".data": 0,
-            ".bss": 340,
-            ".text-delta": 593,
+            ".bss": 392,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 236
+            ".bss-delta": 0
         }
     },
     {
         "module": "[fill]",
         "size": {
-            ".text": 144,
+            ".text": 134,
             ".data": 11,
-            ".bss": 37,
-            ".text-delta": -69,
+            ".bss": 29,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 8
+            ".bss-delta": 0
         }
     },
     {
         "module": "[lib]/c.a",
         "size": {
-            ".text": 31639,
+            ".text": 24565,
             ".data": 2472,
             ".bss": 89,
-            ".text-delta": -3060,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -49,18 +49,7 @@
             ".text": 3112,
             ".data": 0,
             ".bss": 0,
-            ".text-delta": -160,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "[lib]/m.a",
-        "size": {
-            ".text": 0,
-            ".data": 0,
-            ".bss": 0,
-            ".text-delta": -5228,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -89,10 +78,10 @@
     },
     {
         "summary": {
-            "static_ram": 10712,
-            "static_ram_delta": 784,
-            "total_flash": 71718,
-            "total_flash_delta": -6261
+            "static_ram": 10104,
+            "static_ram_delta": 0,
+            "total_flash": 61209,
+            "total_flash_delta": 0
         }
     }
 ]
