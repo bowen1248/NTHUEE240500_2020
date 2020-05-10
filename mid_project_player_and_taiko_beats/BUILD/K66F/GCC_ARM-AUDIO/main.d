@@ -247,4 +247,5 @@ BUILD/K66F/GCC_ARM-AUDIO/main.o: main.cpp \
  /home/bw/ee2405/mbed-os/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_sai.h \
  /home/bw/ee2405/mbed-os/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_sai_edma.h \
  /home/bw/ee2405/mbed-os/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_sai.h \
- /home/bw/ee2405/mbed-os/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_edma.h
+ /home/bw/ee2405/mbed-os/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_K66F/drivers/fsl_edma.h \
+ 4DGL-uLCD-SE/uLCD_4DGL.h

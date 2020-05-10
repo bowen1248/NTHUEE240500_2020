@@ -1,0 +1,1 @@
+https://colab.research.google.com/github/bowen1248/NTHUEE240500/blob/master/mbed7/src/model_train/train_magic_wand_model.ipynb

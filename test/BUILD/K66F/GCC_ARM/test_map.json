@@ -2,9 +2,9 @@
     {
         "module": "../mbed-os-build",
         "size": {
-            ".text": 29934,
+            ".text": 31469,
             ".data": 473,
-            ".bss": 6606,
+            ".bss": 6718,
             ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
@@ -13,9 +13,9 @@
     {
         "module": "BUILD/K66F",
         "size": {
-            ".text": 292,
+            ".text": 1139,
             ".data": 0,
-            ".bss": 392,
+            ".bss": 188,
             ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
@@ -24,9 +24,9 @@
     {
         "module": "[fill]",
         "size": {
-            ".text": 134,
+            ".text": 192,
             ".data": 11,
-            ".bss": 29,
+            ".bss": 33,
             ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
@@ -35,7 +35,7 @@
     {
         "module": "[lib]/c.a",
         "size": {
-            ".text": 24565,
+            ".text": 35055,
             ".data": 2472,
             ".bss": 89,
             ".text-delta": 0,
@@ -78,9 +78,9 @@
     },
     {
         "summary": {
-            "static_ram": 10104,
+            "static_ram": 10016,
             "static_ram_delta": 0,
-            "total_flash": 61209,
+            "total_flash": 74139,
             "total_flash_delta": 0
         }
     }
