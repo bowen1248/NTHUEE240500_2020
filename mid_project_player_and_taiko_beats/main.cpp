@@ -423,6 +423,8 @@ int main(void) {
                 uLCD.locate(0, song_selection);
                 uLCD.printf("=>");
             } else if (gesture_index == 1 && song_selection < 2) {
+                uLCD.locate(0, 0);
+                uLCD.printf("  ");
                 uLCD.locate(0, song_selection);
                 uLCD.printf("  ");
                 song_selection++;
