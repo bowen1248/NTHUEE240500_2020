@@ -2,67 +2,87 @@
 //
 
 #include "mbed.h"
-#include <cmath>
-#include "DA7212.h"
+#include "uLCD_4DGL.h"
 
-#define bufferLength (32)
-#define signalLength (1024)
+Thread t2;
+Ticker tick;
+EventQueue queue(64 * EVENTS_EVENT_SIZE);
+uLCD_4DGL uLCD(D1, D0, D2); // serial tx, serial rx, reset pin;
 
-DA7212 audio;
-Serial pc(USBTX, USBRX);
-InterruptIn button(SW2);
-InterruptIn keyboard0(SW3);
-EventQueue queue(32 * EVENTS_EVENT_SIZE);
-Thread t;
-
-int idC = 0;
-float signal[signalLength];
-int16_t waveform[kAudioTxBufferSize];
-char serialInBuffer[bufferLength];
-int serialCount = 0;
-
-DigitalOut green_led(LED2);
-
-void loadSignal(void){
-  green_led = 0;
-  int i = 0;
-  serialCount = 0;
-  audio.spk.pause();
-  while(i < signalLength) {
-    if(pc.readable()) {
-      serialInBuffer[serialCount] = pc.getc();
-      serialCount++;
-      if(serialCount == 5) {
-        serialInBuffer[serialCount] = '\0';
-        signal[i] = (float) atof(serialInBuffer);
-        serialCount = 0;
-        i++;
-      }
+void taiko_games() {
+    uLCD.circle(30, 110, 6, BLACK);
+        for (int i = 0; i < 5; i++) {
+          uLCD.circle(30, 70 + 10 * (i - 1) ,6, BLACK);
+          uLCD.line(0, 50, 127, 50, GREEN);
+          uLCD.circle(30, 70 + 10 * i , 6, WHITE);
+          uLCD.line(0, 110, 127, 110, GREEN);
+          wait(0.2);
+        }
     }
-  }
-  green_led = 1;
+int main() {
+    t2.start(callback(&queue, &EventQueue::dispatch_forever));
+    tick.attach(queue.event(taiko_games), 1);
+    // basic printf demo = 16 by 18 characters on screen
 }
 
-void playNote(int freq) {
-  for (int i = 0; i < kAudioTxBufferSize; i++) {
-    waveform[i] = (int16_t) (signal[(uint16_t) (i * freq * signalLength * 1. / kAudioSampleFrequency) % signalLength] * ((1<<16) - 1));
-  }
-  // the loop below will play the note for the duration of 1s
-  for(int j = 0; j < kAudioSampleFrequency / kAudioTxBufferSize; ++j) {
-    audio.spk.play(waveform, kAudioTxBufferSize);
-  }
-}
 
-void loadSignalHandler(void) {queue.call(loadSignal);}
 
-void playNoteC(void) {idC = queue.call_every(1, playNote, 261);}
 
-void stopPlayNoteC(void) {queue.cancel(idC);}
 
-int main(void) {
-  green_led = 1;
-  t.start(callback(&queue, &EventQueue::dispatch_forever));
-  button.rise(queue.event(loadSignalHandler));
-  keyboard0.rise(queue.event(playNoteC));
-  keyboard0.fall(queue.event(stopPlayNoteC));
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+void Taiko(void) {
+    int x = 64;
+    int y = 0;
+    int score = 0;
+    bool pointed = false;       // allow getting point only one time
+    bool red = true;
+    uLCD.background_color(BLACK);
+    uLCD.cls();
+    uLCD.line(0, 100, 127, 100, WHITE);
+    uLCD.circle(64, 100, 10, WHITE);
+    while(sw3) {
+        if (red == true) {
+            uLCD.filled_circle(x, y, 5, RED);
+        }
+        else {
+            uLCD.filled_circle(x, y, 5, GREEN);
+        }
+        //
+        if ((y > 85 && y < 115) && output == SLOPE && !pointed && red) {
+            score += 2;
+            pointed = true;
+        }
+        else if ((y > 70 && y < 115) && output == RING && !pointed && !red) {
+            score += 2;
+            pointed = true;
+        }
+        //
+        if (y > 132) {
+            uLCD.line(0, 100, 127, 100, WHITE);
+            uLCD.circle(64, 100, 10, WHITE);
+            pointed = false;
+            red = !red;
+            y = 0;
+        }
+        uLCD.filled_circle(x, y, 5, BLACK);
+        uLCD.locate(1, 2);
+        uLCD.printf("%d", score);
+        y += 4;
+    }
+  */
