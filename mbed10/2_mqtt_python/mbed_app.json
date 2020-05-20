@@ -1,0 +1,22 @@
+{
+    "config": {
+      "wifi-shield": {
+        "help": "Options are WIFI_ESP8266, WIFI_IDW0XX1",
+        "value": "WIFI_ESP8266"
+      },
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"bwbwbwbw\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"1234567890\""
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "platform.stdio-convert-newlines": true,
+            "esp8266.provide-default" : true
+        }
+    }
+}

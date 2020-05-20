@@ -1,30 +1,80 @@
-// uLCD-144-G2 basic text demo program for uLCD-4GL LCD driver library
-//
-
 #include "mbed.h"
-#include "uLCD_4DGL.h"
 
-Thread t2;
-Ticker tick;
-EventQueue queue(64 * EVENTS_EVENT_SIZE);
-uLCD_4DGL uLCD(D1, D0, D2); // serial tx, serial rx, reset pin;
+#include "mbed_events.h"
 
-void taiko_games() {
-    uLCD.circle(30, 110, 6, BLACK);
-        for (int i = 0; i < 5; i++) {
-          uLCD.circle(30, 70 + 10 * (i - 1) ,6, BLACK);
-          uLCD.line(0, 50, 127, 50, GREEN);
-          uLCD.circle(30, 70 + 10 * i , 6, WHITE);
-          uLCD.line(0, 110, 127, 110, GREEN);
-          wait(0.2);
-        }
-    }
-int main() {
-    t2.start(callback(&queue, &EventQueue::dispatch_forever));
-    tick.attach(queue.event(taiko_games), 1);
-    // basic printf demo = 16 by 18 characters on screen
+
+DigitalOut led1(LED1);
+
+DigitalOut led2(LED2);
+
+InterruptIn btn(SW2);
+
+
+EventQueue printfQueue;
+
+EventQueue eventQueue;
+
+
+void blink_led2() {
+while(1) {
+  // this runs in the normal priority thread
+
+  led2 = !led2;
+}
 }
 
+
+void print_toggle_led() {
+
+  // this runs in the lower priority thread
+
+  printf("Toggle LED!\r\n");
+
+}
+
+
+void btn_fall_irq() {
+
+  led1 = !led1;
+
+
+  // defer the printf call to the low priority thread
+
+  printfQueue.call(&print_toggle_led);
+
+}
+
+
+int main() {
+
+  // low priority thread for calling printf()
+
+  Thread printfThread(osPriorityLow);
+
+  printfThread.start(callback(&printfQueue, &EventQueue::dispatch_forever));
+
+
+  // normal priority thread for other events
+
+  Thread eventThread(osPriorityNormal);
+
+  eventThread.start(callback(&eventQueue, &EventQueue::dispatch_forever));
+
+
+  // call blink_led2 every second, automatically defering to the eventThread
+    while(1) {
+  eventQueue.event(&blink_led2);
+wait(1);
+    }
+
+  // button fall still runs in the ISR
+
+  btn.fall(&btn_fall_irq);
+
+
+  while (1) {wait(1);}
+
+}
 
 
 

@@ -139,6 +139,7 @@ void loadSong(void) {
             }
         }
     }
+    /*
     pc.printf("%d\r\n", custom_song_length);
     for (int i = 0; i < custom_song_length; i++) {
       pc.printf(" %d", custom_note[i]);
@@ -150,6 +151,7 @@ void loadSong(void) {
       wait(0.1);
     }
     pc.printf("\n");
+    */
     green_led = 1;
 }
 void playNote(int freq) {
