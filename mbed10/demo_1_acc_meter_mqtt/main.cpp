@@ -102,21 +102,21 @@ void messageArrived(MQTT::MessageData& md) {
 }
 
 void publish_message(MQTT::Client<MQTTNetwork, Countdown>* client) {
-while(1) {
-      message_num++;
-      MQTT::Message message;
-      char buff[100];
-      sprintf(buff, "FXOS8700Q ACC: X=%1.4f Y=%1.4f Z=%1.4f #%d\r\n",\
-        t[0], t[1], t[2], message_num);
-      message.qos = MQTT::QOS0;
-      message.retained = false;
-      message.dup = false;
-      message.payload = (void*) buff;
-      message.payloadlen = strlen(buff) + 1;
-      int rc = client->publish(topic, message);
-      printf("rc:  %d\r\n", rc);
-      printf("Puslish message: %s\r\n", buff);
-}
+      while(1) {
+            message_num++;
+            MQTT::Message message;
+            char buff[100];
+            sprintf(buff, "FXOS8700Q ACC: X=%1.4f Y=%1.4f Z=%1.4f #%d\r\n",\
+                  t[0], t[1], t[2], message_num);
+            message.qos = MQTT::QOS0;
+            message.retained = false;
+            message.dup = false;
+            message.payload = (void*) buff;
+            message.payloadlen = strlen(buff) + 1;
+            int rc = client->publish(topic, message);
+            printf("rc:  %d\r\n", rc);
+            printf("Puslish message: %s\r\n", buff);
+      }
 }
 
 void close_mqtt() {

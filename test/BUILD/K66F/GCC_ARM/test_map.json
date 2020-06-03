@@ -1,22 +1,22 @@
 [
     {
-        "module": "4DGL-uLCD-SE/uLCD_4DGL_main.o",
+        "module": "../mbed-os-build",
         "size": {
-            ".text": 54,
-            ".data": 0,
-            ".bss": 0,
+            ".text": 33714,
+            ".data": 473,
+            ".bss": 6638,
             ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
     },
     {
-        "module": "DA7212/DA7212.o",
+        "module": "BUILD/K66F",
         "size": {
-            ".text": 52,
+            ".text": 1208,
             ".data": 0,
-            ".bss": 12,
-            ".text-delta": 0,
+            ".bss": 384,
+            ".text-delta": 4,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -24,10 +24,10 @@
     {
         "module": "[fill]",
         "size": {
-            ".text": 140,
+            ".text": 144,
             ".data": 11,
-            ".bss": 33,
-            ".text-delta": -9,
+            ".bss": 29,
+            ".text-delta": 4,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -35,10 +35,10 @@
     {
         "module": "[lib]/c.a",
         "size": {
-            ".text": 24565,
+            ".text": 24629,
             ".data": 2472,
             ".bss": 89,
-            ".text-delta": -174,
+            ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
         }
@@ -77,99 +77,11 @@
         }
     },
     {
-        "module": "main.o",
-        "size": {
-            ".text": 582,
-            ".data": 0,
-            ".bss": 244,
-            ".text-delta": -169,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/components",
-        "size": {
-            ".text": 119,
-            ".data": 0,
-            ".bss": 0,
-            ".text-delta": -28,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/drivers",
-        "size": {
-            ".text": 336,
-            ".data": 0,
-            ".bss": 0,
-            ".text-delta": -76,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/events",
-        "size": {
-            ".text": 1291,
-            ".data": 0,
-            ".bss": 0,
-            ".text-delta": 0,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/hal",
-        "size": {
-            ".text": 1943,
-            ".data": 8,
-            ".bss": 131,
-            ".text-delta": 0,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/platform",
-        "size": {
-            ".text": 6369,
-            ".data": 261,
-            ".bss": 221,
-            ".text-delta": 0,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/rtos",
-        "size": {
-            ".text": 11845,
-            ".data": 168,
-            ".bss": 5980,
-            ".text-delta": 0,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "mbed-os/targets",
-        "size": {
-            ".text": 11460,
-            ".data": 36,
-            ".bss": 926,
-            ".text-delta": -144,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
         "summary": {
-            "static_ram": 10624,
+            "static_ram": 10128,
             "static_ram_delta": 0,
-            "total_flash": 65040,
-            "total_flash_delta": -600
+            "total_flash": 65979,
+            "total_flash_delta": 8
         }
     }
 ]

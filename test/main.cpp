@@ -1,138 +1,106 @@
 #include "mbed.h"
 
-#include "mbed_events.h"
+RawSerial pc(USBTX, USBRX);
+RawSerial xbee(D12, D11);
+EventQueue queue(32 * EVENTS_EVENT_SIZE);
 
+Thread t;
 
-DigitalOut led1(LED1);
-
-DigitalOut led2(LED2);
-
-InterruptIn btn(SW2);
-
-
-EventQueue printfQueue;
-
-EventQueue eventQueue;
-
-
-void blink_led2() {
-while(1) {
-  // this runs in the normal priority thread
-
-  led2 = !led2;
-}
-}
-
-
-void print_toggle_led() {
-
-  // this runs in the lower priority thread
-
-  printf("Toggle LED!\r\n");
-
-}
-
-
-void btn_fall_irq() {
-
-  led1 = !led1;
-
-
-  // defer the printf call to the low priority thread
-
-  printfQueue.call(&print_toggle_led);
-
-}
-
+void xbee_rx_interrupt(void);
+void xbee_rx(void);
+void reply_messange(char *xbee_reply, char *messange);
+void check_addr(char *xbee_reply, char *messenger);
 
 int main() {
+  pc.baud(9600);
+  char xbee_reply[4];
 
-  // low priority thread for calling printf()
+  // XBee setting
+  xbee.baud(9600);
+  xbee.printf("+++");
+  xbee_reply[0] = xbee.getc();
+  xbee_reply[1] = xbee.getc();
+  if(xbee_reply[0] == 'O' && xbee_reply[1] == 'K'){
+    pc.printf("enter AT mode.\r\n");
+    xbee_reply[0] = '\0';
+    xbee_reply[1] = '\0';
+  }
 
-  Thread printfThread(osPriorityLow);
+  xbee.printf("ATMY 0x141\r\n");
+  reply_messange(xbee_reply, "setting MY : 0x141");
 
-  printfThread.start(callback(&printfQueue, &EventQueue::dispatch_forever));
+  xbee.printf("ATDL 0x140\r\n");
+  reply_messange(xbee_reply, "setting DL : 0x140");
 
+  xbee.printf("ATID 0x3\r\n");
+  reply_messange(xbee_reply, "setting PAN ID : 0x3");
 
-  // normal priority thread for other events
+  xbee.printf("ATWR\r\n");
+  reply_messange(xbee_reply, "write config");
 
-  Thread eventThread(osPriorityNormal);
+  xbee.printf("ATMY\r\n");
+  check_addr(xbee_reply, "MY");
 
-  eventThread.start(callback(&eventQueue, &EventQueue::dispatch_forever));
+  xbee.printf("ATDL\r\n");
+  check_addr(xbee_reply, "DL");
 
+  xbee.printf("ATCN\r\n");
+  reply_messange(xbee_reply, "exit AT mode");
 
-  // call blink_led2 every second, automatically defering to the eventThread
-    while(1) {
-  eventQueue.event(&blink_led2);
-wait(1);
-    }
+  while (xbee.readable())
+    xbee.getc();
+  // start
+  pc.printf("start\r\n");
+  t.start(callback(&queue, &EventQueue::dispatch_forever));
 
-  // button fall still runs in the ISR
+  // Setup a serial interrupt function to receive data from xbee
+  xbee.attach(xbee_rx_interrupt, Serial::RxIrq);
+}
 
-  btn.fall(&btn_fall_irq);
-
-
-  while (1) {wait(1);}
-
+void xbee_rx_interrupt(void) {
+  xbee.attach(NULL, Serial::RxIrq); // detach interrupt
+  queue.call(&xbee_rx);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-void Taiko(void) {
-    int x = 64;
-    int y = 0;
-    int score = 0;
-    bool pointed = false;       // allow getting point only one time
-    bool red = true;
-    uLCD.background_color(BLACK);
-    uLCD.cls();
-    uLCD.line(0, 100, 127, 100, WHITE);
-    uLCD.circle(64, 100, 10, WHITE);
-    while(sw3) {
-        if (red == true) {
-            uLCD.filled_circle(x, y, 5, RED);
-        }
-        else {
-            uLCD.filled_circle(x, y, 5, GREEN);
-        }
-        //
-        if ((y > 85 && y < 115) && output == SLOPE && !pointed && red) {
-            score += 2;
-            pointed = true;
-        }
-        else if ((y > 70 && y < 115) && output == RING && !pointed && !red) {
-            score += 2;
-            pointed = true;
-        }
-        //
-        if (y > 132) {
-            uLCD.line(0, 100, 127, 100, WHITE);
-            uLCD.circle(64, 100, 10, WHITE);
-            pointed = false;
-            red = !red;
-            y = 0;
-        }
-        uLCD.filled_circle(x, y, 5, BLACK);
-        uLCD.locate(1, 2);
-        uLCD.printf("%d", score);
-        y += 4;
+void xbee_rx(void) {
+  char buf[100] = {0};
+  while(xbee.readable()){
+    for (int i=0; ; i++) {
+      char recv = xbee.getc();
+      if (recv == '\r' || recv == '\n') {
+        break;
+      }
+      buf[i] = pc.putc(recv);
     }
-  */
+    pc.printf("%s\r\n", buf);
+    xbee.printf("%s\r\n", buf);
+    wait(0.1);
+  }
+  xbee.attach(xbee_rx_interrupt, Serial::RxIrq); // reattach interrupt
+}
+
+void reply_messange(char *xbee_reply, char *messange){
+  xbee_reply[0] = xbee.getc();
+  xbee_reply[1] = xbee.getc();
+  xbee_reply[2] = xbee.getc();
+  if(xbee_reply[1] == 'O' && xbee_reply[2] == 'K'){
+   pc.printf("%s\r\n", messange);
+   xbee_reply[0] = '\0';
+   xbee_reply[1] = '\0';
+   xbee_reply[2] = '\0';
+  }
+}
+
+
+void check_addr(char *xbee_reply, char *messenger){
+  xbee_reply[0] = xbee.getc();
+  xbee_reply[1] = xbee.getc();
+  xbee_reply[2] = xbee.getc();
+  xbee_reply[3] = xbee.getc();
+  pc.printf("%s = %c%c%c\r\n", messenger, xbee_reply[1], xbee_reply[2], xbee_reply[3]);
+  xbee_reply[0] = '\0';
+  xbee_reply[1] = '\0';
+  xbee_reply[2] = '\0';
+  xbee_reply[3] = '\0';
+}
