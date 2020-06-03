@@ -2,6 +2,7 @@
 #include "mbed_rpc.h"
 #include "fsl_port.h"
 #include "fsl_gpio.h"
+#include  <stdlib.h>
 
 #define UINT14_MAX 16383
 // FXOS8700CQ I2C address
@@ -29,7 +30,7 @@ RawSerial pc(USBTX, USBRX);
 RawSerial xbee(D12, D11);
 I2C i2c( PTD9,PTD8);
 EventQueue queue(32 * EVENTS_EVENT_SIZE);
-Thread t;
+Thread thr;
 void read_accelero(Arguments *in, Reply *out);
 RPCFunction read_acce(&read_accelero, "r");
 
@@ -77,7 +78,7 @@ int main(){
   xbee.getc();
   // start
   pc.printf("start\r\n");
-  t.start(callback(&queue, &EventQueue::dispatch_forever));
+  thr.start(callback(&queue, &EventQueue::dispatch_forever));
 
   // Setup a serial interrupt function of receiving data from xbee
   xbee.attach(xbee_rx_interrupt, Serial::RxIrq);
@@ -134,7 +135,7 @@ void check_addr(char *xbee_reply, char *messenger){
 
 void read_accelero(Arguments *in, Reply *out) {
   pc.putc('i');
-  float t[3];
+  int t[3];
   uint8_t who_am_i, data[2], res[6];
   int16_t acc16;
   int acc_speed;
@@ -166,7 +167,7 @@ void read_accelero(Arguments *in, Reply *out) {
         itoa(acc_speed, num_buf, 10);
         xbee.printf("%s\r\n", num_buf);
         pc.printf("%s\r\n", num_buf);
-    wait(0.1);
+    thr.wait(100);
   }
 }
 
