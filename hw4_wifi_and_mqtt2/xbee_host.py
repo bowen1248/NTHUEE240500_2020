@@ -1,10 +1,9 @@
 import serial
 import time
+import math
 import matplotlib.pyplot as plt
 import numpy as np
 import paho.mqtt.client as paho
-import time
-
 
 # XBee setting
 serdev = '/dev/ttyUSB0'
@@ -16,6 +15,8 @@ sample_times = np.arange(0, 20, 1)
 x_acc = np.arange(0, 20, 0.5)
 y_acc = np.arange(0, 20, 0.5)
 z_acc = np.arange(0, 20, 0.5)
+tilt = np.arange(0, 20, 0.5)
+send = np.arange(0, 80, 0.5)
 
 s.write("+++".encode())
 char = s.read(2)
@@ -64,28 +65,31 @@ time.sleep(0.5)
 package = "/get_sample_num/run\r"
 s.write(package.encode())
 print("send rpc\r\n")
+line = s.readline()
+time.sleep(1)
 
 for i in range(0,20):
-    time.sleep(1)
     package = "/get_sample_num/run\r"
     s.write(package.encode())
     print("send rpc")
     line = s.readline()
-    sample_times[i] = int(line.decode())
+    sample_times[i] = line.decode()
     print(sample_times[i])
+    time.sleep(0.92)
 
 for i in range(0,40):
     line = s.readline()
-    x_acc[i] = int(line.decode()) / 4096
+    x_acc[i] = float(line.decode())
     print(x_acc[i])
     line = s.readline()
-    y_acc[i] = int(line.decode()) / 4096
+    y_acc[i] = float(line.decode())
     print(y_acc[i])
     line = s.readline()
-    z_acc[i] = int(line.decode()) / 4096
+    z_acc[i] = float(line.decode())
     print(z_acc[i])
-
-
+    if ((z_acc[i] / math.sqrt(x_acc[i] * x_acc[i] + y_acc[i] * y_acc[i] + z_acc[i] * z_acc[i])) < 0.7071):
+        tilt[i] = 1.5
+    else: tilt[i] = 0.5
 mqttc = paho.Client()
 
 # Settings for connection
@@ -116,16 +120,16 @@ mqttc.on_unsubscribe = on_unsubscribe
 print("Connecting to " + host + "/" + topic)
 mqttc.connect(host, port=1883, keepalive=60)
 for i in range(0,40):
-    mesg = str(x_acc[i])
-    mqttc.publish(topic, mesg)
-    time.sleep(0.1)
-    mesg = str(y_acc[i])
-    mqttc.publish(topic, mesg)
-    time.sleep(0.1)
-    mesg = str(z_acc[i])
-    mqttc.publish(topic, mesg)
-    time.sleep(0.1)
+    send[i] = x_acc[i]
+for i in range(0,40):
+    send[i + 40] = y_acc[i]
+for i in range(0,40):
+    send[i + 80] = z_acc[i]
+for i in range(0,40):
+    send[i + 120] = tilt[i]
 
+send = ' '.join(str(send).split())
+mqttc.publish(topic, send)
 fig, ax = plt.subplots(1, 1)
 ax.plot(t1,sample_times)
 ax.set_xlabel('Time')

@@ -31,12 +31,11 @@ I2C i2c( PTD9,PTD8);
 RawSerial pc(USBTX, USBRX);
 RawSerial xbee(D12, D11);
 Thread accel_thread;
-Thread xbee_thread(osPriorityHigh);
+Thread xbee_thread;
 EventQueue xbee_queue;
-Mutex a;
 
 float sample_time[RECORD_TIMES];
-int x_acc[RECORD_TIMES], y_acc[RECORD_TIMES], z_acc[RECORD_TIMES];
+float x_acc[RECORD_TIMES], y_acc[RECORD_TIMES], z_acc[RECORD_TIMES];
 int total_sample = 0;
 float current_time = 0;
 bool is_tilting = false;
@@ -117,7 +116,6 @@ void xbee_rx(void) {
             }
             buf[i] = recv;
         }
-        //pc.printf("%s\r\n", buf);
         RPC::call(buf, outbuf);
     }
     xbee.attach(xbee_rx_interrupt, Serial::RxIrq); // reattach interrupt
@@ -149,37 +147,26 @@ void check_addr(char *xbee_reply, char *messenger){
 }
 
 void rpc_sample_num (Arguments *in, Reply *out)  {
-    char* num_buf = new char[100];
     static int prev_sec_sample = 0;
     int this_sec_sample = 0;
-    a.lock();
-    if (get_rpc_times == 0) {
+    if (get_rpc_times == 0) 
         first_time_sample = total_sample;
-        return;
-    }
     this_sec_sample = total_sample - prev_sec_sample;
     prev_sec_sample = total_sample;
-    itoa(this_sec_sample, num_buf, 10);
-    pc.printf("%s\r\n", num_buf);
-    xbee.printf("%s\r\n", num_buf);
+    //pc.printf("%d\r\n", this_sec_sample);
+    xbee.printf("%d\r\n", this_sec_sample);
     get_rpc_times++;
-    a.unlock();
-    //pc.printf("%d\r\n", get_rpc_times);
     if (get_rpc_times >= 21) {
         accel_thread.terminate();
-        char num_buf[100] = {0};
         for (int i = first_time_sample; i < first_time_sample + 40; i++) {
-            itoa(x_acc[i], num_buf, 10);
-            xbee.printf("%s\n", num_buf);
-            pc.printf("%s\r\n", num_buf);
+            xbee.printf("%f\n", x_acc[i]);
+            pc.printf("%f\r\n", x_acc[i]);
             wait(0.1);
-            itoa(y_acc[i], num_buf, 10);
-            xbee.printf("%s\n", num_buf);
-            pc.printf("%s\r\n", num_buf);
+            xbee.printf("%f\n", y_acc[i]);
+            pc.printf("%f\r\n", y_acc[i]);
             wait(0.1);
-            itoa(z_acc[i], num_buf, 10);
-            xbee.printf("%s\n", num_buf);
-            pc.printf("%s\r\n", num_buf);
+            xbee.printf("%f\n", z_acc[i]);
+            pc.printf("%f\r\n", z_acc[i]);
             wait(0.1);
         }
     }
@@ -199,15 +186,15 @@ void read_accelero() {
         acc16 = (res[0] << 6) | (res[1] >> 2);
         if (acc16 > UINT14_MAX/2)
             acc16 -= UINT14_MAX;
-        x_acc[total_sample] = acc16;
+        x_acc[total_sample] = acc16 / 4096.0;
         acc16 = (res[2] << 6) | (res[3] >> 2);
         if (acc16 > UINT14_MAX/2)
             acc16 -= UINT14_MAX;
-        y_acc[total_sample] = acc16;
+        y_acc[total_sample] = acc16 / 4096.0;
         acc16 = (res[4] << 6) | (res[5] >> 2);
         if (acc16 > UINT14_MAX/2)
             acc16 -= UINT14_MAX;
-        z_acc[total_sample] = acc16;
+        z_acc[total_sample] = acc16 / 4096.0;
         /* if ((z_acc[total_sample] / sqrt(x_acc[total_sample] * x_acc[total_sample]
              + y_acc[total_sample] * y_acc[total_sample] + z_acc[total_sample] * z_acc[total_sample])) < 0.7071)
             is_tilting = true;
