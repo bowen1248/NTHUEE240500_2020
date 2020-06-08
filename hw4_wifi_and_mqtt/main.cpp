@@ -153,21 +153,20 @@ void rpc_sample_num (Arguments *in, Reply *out)  {
         first_time_sample = total_sample;
     this_sec_sample = total_sample - prev_sec_sample;
     prev_sec_sample = total_sample;
-    //pc.printf("%d\r\n", this_sec_sample);
     xbee.printf("%d\r\n", this_sec_sample);
     get_rpc_times++;
     if (get_rpc_times >= 21) {
         accel_thread.terminate();
         for (int i = first_time_sample; i < first_time_sample + 40; i++) {
             xbee.printf("%f\n", x_acc[i]);
-            pc.printf("%f\r\n", x_acc[i]);
-            wait(0.1);
+            //pc.printf("%f\r\n", x_acc[i]);
+            wait(0.05);
             xbee.printf("%f\n", y_acc[i]);
-            pc.printf("%f\r\n", y_acc[i]);
-            wait(0.1);
+            //pc.printf("%f\r\n", y_acc[i]);
+            wait(0.05);
             xbee.printf("%f\n", z_acc[i]);
-            pc.printf("%f\r\n", z_acc[i]);
-            wait(0.1);
+            //pc.printf("%f\r\n", z_acc[i]);
+            wait(0.05);
         }
     }
 }

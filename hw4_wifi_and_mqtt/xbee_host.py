@@ -10,7 +10,6 @@ serdev = '/dev/ttyUSB0'
 
 s = serial.Serial(serdev, 9600, timeout = 5)
 t1 = np.arange(0, 20, 1)
-t2 = np.arange(0, 20, 0.5)
 sample_times = np.arange(0, 20, 1)
 x_acc = np.arange(0, 20, 0.5)
 y_acc = np.arange(0, 20, 0.5)
@@ -58,10 +57,9 @@ s.write("ATCN\r\n".encode())
 char = s.read(3)
 print("Exit AT mode.")
 print(char.decode())
-
 time.sleep(0.5)
-# send to remote
 
+# send rpc to xbee
 package = "/get_sample_num/run\r"
 s.write(package.encode())
 print("send rpc\r\n")
@@ -77,6 +75,7 @@ for i in range(0,20):
     print(sample_times[i])
     time.sleep(0.92)
 
+# read data from mbed
 for i in range(0,40):
     line = s.readline()
     x_acc[i] = float(line.decode())
@@ -90,9 +89,9 @@ for i in range(0,40):
     if ((z_acc[i] / math.sqrt(x_acc[i] * x_acc[i] + y_acc[i] * y_acc[i] + z_acc[i] * z_acc[i])) < 0.7071):
         tilt[i] = 1.5
     else: tilt[i] = 0.5
-mqttc = paho.Client()
 
 # Settings for connection
+mqttc = paho.Client()
 host = "localhost"
 topic= "Mbed"
 port = 1883
@@ -128,10 +127,13 @@ for i in range(0,40):
 for i in range(0,40):
     send[i + 120] = tilt[i]
 
+# Send message
 send = ' '.join(str(send).split())
 mqttc.publish(topic, send)
+
+# draw sample time plot
 fig, ax = plt.subplots(1, 1)
-ax.plot(t1,sample_times)
+ax.plot(t,sample_times)
 ax.set_xlabel('Time')
 ax.set_ylabel('Sample time')
 plt.show()

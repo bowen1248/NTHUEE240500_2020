@@ -9,9 +9,9 @@ x_acc = np.arange(0, 20, 0.5)
 y_acc = np.arange(0, 20, 0.5)
 z_acc = np.arange(0, 20, 0.5)
 tilt = np.arange(0, 20, 0.5)
-mqttc = paho.Client()
 
 # Settings for connection
+mqttc = paho.Client()
 host = "localhost"
 topic= "Mbed"
 port = 1883
@@ -20,33 +20,28 @@ port = 1883
 def on_connect(self, mosq, obj, rc):
     print("Connected rc: " + str(rc))
 
+# When get message
 def on_message(mosq, obj, msg):
-    print("[Received] Topic: " + msg.topic + ", Message: " + str(msg.payload) + "\n")
+    #print("[Received] Topic: " + msg.topic + ", Message: " + str(msg.payload) + "\n")
+    # get message
     data = str(msg.payload)
+    # split message to each array
     data = data.split()
+    # dispatch bad data
     x_acc[0] = 0
     for i in range(1, 40):
-        print(i)
         x_acc[i] = float(data[i])
     for i in range(0, 40):
-        print(i)
         y_acc[i] = float(data[i + 40])
     for i in range(0, 40):
-        print(i)
         z_acc[i] = float(data[i + 80])
     for i in range(0, 39):
-        print(i)
-        print(float(data[i + 120]))
         if float(data[i + 120]) == 1.5:
             tilt[i] = 1
         else: tilt[i] = 0
     tilt[39] = 0
-    print(x_acc)
-    print(y_acc)
-    print(z_acc)
-    print(tilt)
+    # draw figure
     fig, ax = plt.subplots(2, 1)
-    print("fuck")
     ax[0].plot(t, x_acc, label = 'x')
     ax[0].plot(t, y_acc, label = 'y')
     ax[0].plot(t, z_acc, label = 'z')
@@ -56,9 +51,7 @@ def on_message(mosq, obj, msg):
     ax[1].stem(t, tilt, use_line_collection = True)
     ax[1].set_ylabel('Tilt')
     ax[1].set_xlabel('Time')
-    print("fuck")
     plt.show()
-    time.sleep(10)
     
 def on_subscribe(mosq, obj, mid, granted_qos):
     print("Subscribed OK")
