@@ -1,0 +1,18 @@
+{
+    "flags": [
+        "-x",
+        "assembler-with-cpp"
+    ],
+    "macros": [],
+    "symbols": [
+        "ARM_MATH_CM4",
+        "CPU_MK66FN2M0VMD18",
+        "FSL_RTOS_MBED",
+        "MBED_SPLIT_HEAP",
+        "MBED_TICKLESS",
+        "__CMSIS_RTOS",
+        "__CORTEX_M4",
+        "__FPU_PRESENT=1",
+        "__MBED_CMSIS_RTOS_CM"
+    ]
+}

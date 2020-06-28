@@ -9,7 +9,7 @@ import paho.mqtt.client as paho
 serdev = '/dev/ttyUSB0'
 
 s = serial.Serial(serdev, 9600, timeout = 5)
-t1 = np.arange(0, 20, 1)
+t = np.arange(0, 20, 1)
 sample_times = np.arange(0, 20, 1)
 x_acc = np.arange(0, 20, 0.5)
 y_acc = np.arange(0, 20, 0.5)

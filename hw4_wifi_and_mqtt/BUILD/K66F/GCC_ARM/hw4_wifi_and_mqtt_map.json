@@ -1,10 +1,10 @@
 [
     {
-        "module": "../mbed-os-build-i2c",
+        "module": "../mbed-os-build",
         "size": {
-            ".text": 36289,
+            ".text": 37097,
             ".data": 473,
-            ".bss": 6762,
+            ".bss": 6682,
             ".text-delta": 0,
             ".data-delta": 0,
             ".bss-delta": 0
@@ -13,29 +13,29 @@
     {
         "module": "BUILD/K66F",
         "size": {
-            ".text": 889,
-            ".data": 4,
-            ".bss": 32329,
-            ".text-delta": 91,
+            ".text": 2884,
+            ".data": 20,
+            ".bss": 24760,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 8004
+            ".bss-delta": 0
         }
     },
     {
         "module": "[fill]",
         "size": {
-            ".text": 203,
-            ".data": 14,
-            ".bss": 40,
-            ".text-delta": 5,
+            ".text": 209,
+            ".data": 7,
+            ".bss": 33,
+            ".text-delta": 0,
             ".data-delta": 0,
-            ".bss-delta": 4
+            ".bss-delta": 0
         }
     },
     {
         "module": "[lib]/c.a",
         "size": {
-            ".text": 34739,
+            ".text": 25769,
             ".data": 2472,
             ".bss": 89,
             ".text-delta": 0,
@@ -48,17 +48,6 @@
         "size": {
             ".text": 3272,
             ".data": 0,
-            ".bss": 0,
-            ".text-delta": 0,
-            ".data-delta": 0,
-            ".bss-delta": 0
-        }
-    },
-    {
-        "module": "[lib]/m.a",
-        "size": {
-            ".text": 194,
-            ".data": 1,
             ".bss": 0,
             ".text-delta": 0,
             ".data-delta": 0,
@@ -89,10 +78,10 @@
     },
     {
         "summary": {
-            "static_ram": 42216,
-            "static_ram_delta": 8008,
-            "total_flash": 78766,
-            "total_flash_delta": 96
+            "static_ram": 34568,
+            "static_ram_delta": 0,
+            "total_flash": 72419,
+            "total_flash_delta": 0
         }
     }
 ]

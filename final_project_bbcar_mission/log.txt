@@ -1,0 +1,30 @@
+Advancing
+Turn right
+Advancing
+Turn left
+Reversing
+Advancing
+Turn left
+Reversing
+Turn right
+Reversing
+This is: 3
+Advancing
+Turn left
+Advancing
+Turn left
+Advancing
+Turn left
+Advancing
+Turn left
+Advancing
+This is right triangle
+Reversing
+Turn right
+Turn right
+Advancing
+Turn left
+Advancing
+Turn left
+Advancing
+END
